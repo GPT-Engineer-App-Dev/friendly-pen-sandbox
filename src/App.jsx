@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { toast } from "sonner";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "next-themes";
 import { navItems } from "./nav-items";
@@ -21,6 +22,7 @@ const App = () => {
 
   const deletePost = (postId) => {
     setBlogPosts(blogPosts.filter(post => post.id !== postId));
+    toast.success("Post deleted successfully");
   };
 
   return (

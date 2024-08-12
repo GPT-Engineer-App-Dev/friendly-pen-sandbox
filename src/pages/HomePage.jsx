@@ -1,11 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { Button } from "@/components/ui/button";
 import { PlusCircle, Trash2 } from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 const HomePage = ({ blogPosts, deletePost }) => {
+  const [postToDelete, setPostToDelete] = useState(null);
+
+  const handleDeleteConfirm = () => {
+    if (postToDelete) {
+      deletePost(postToDelete);
+      setPostToDelete(null);
+    }
+  };
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-8">
@@ -33,14 +52,30 @@ const HomePage = ({ blogPosts, deletePost }) => {
               <span className="text-sm text-gray-500">{post.date}</span>
               <div className="flex items-center space-x-2">
                 <Link to={`/post/${post.id}`} className="text-blue-500 hover:underline">Read more</Link>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => deletePost(post.id)}
-                  className="text-red-500 hover:bg-red-100 dark:hover:bg-red-900"
-                >
-                  Delete
-                </Button>
+                <AlertDialog>
+                  <AlertDialogTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => setPostToDelete(post.id)}
+                      className="text-red-500 hover:bg-red-100 dark:hover:bg-red-900"
+                    >
+                      Delete
+                    </Button>
+                  </AlertDialogTrigger>
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                      <AlertDialogDescription>
+                        This action cannot be undone. This will permanently delete the blog post.
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel>Cancel</AlertDialogCancel>
+                      <AlertDialogAction onClick={handleDeleteConfirm}>Delete</AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
               </div>
             </CardFooter>
           </Card>
