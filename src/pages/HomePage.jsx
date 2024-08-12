@@ -35,11 +35,11 @@ const HomePage = ({ blogPosts, deletePost }) => {
                 <Link to={`/post/${post.id}`} className="text-blue-500 hover:underline">Read more</Link>
                 <Button
                   variant="ghost"
-                  size="icon"
+                  size="sm"
                   onClick={() => deletePost(post.id)}
                   className="text-red-500 hover:bg-red-100 dark:hover:bg-red-900"
                 >
-                  <Trash2 className="h-4 w-4" />
+                  Delete
                 </Button>
               </div>
             </CardFooter>
