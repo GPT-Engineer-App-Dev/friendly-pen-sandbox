@@ -27,7 +27,7 @@ const HomePage = ({ blogPosts, deletePost }) => {
               <CardTitle>{post.title}</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-gray-600">{post.excerpt}</p>
+              <p className="text-gray-600">{post.content.substring(0, 100)}...</p>
             </CardContent>
             <CardFooter className="flex justify-between items-center">
               <span className="text-sm text-gray-500">{post.date}</span>
