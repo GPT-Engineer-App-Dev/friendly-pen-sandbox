@@ -2,19 +2,23 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { Button } from "@/components/ui/button";
+import { PlusCircle } from "lucide-react";
 
-const blogPosts = [
-  { id: 1, title: "My First Blog Post", excerpt: "This is the beginning of my blogging journey...", date: "2023-04-01" },
-  { id: 2, title: "Reflections on Web Development", excerpt: "As I delve deeper into web development...", date: "2023-04-15" },
-  { id: 3, title: "The Importance of User Experience", excerpt: "User experience is at the heart of every successful website...", date: "2023-05-01" },
-];
-
-const HomePage = () => {
+const HomePage = ({ blogPosts }) => {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-4xl font-bold">My Personal Blog</h1>
-        <ThemeToggle />
+        <div className="flex items-center space-x-4">
+          <Link to="/new">
+            <Button>
+              <PlusCircle className="mr-2 h-4 w-4" />
+              New Post
+            </Button>
+          </Link>
+          <ThemeToggle />
+        </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {blogPosts.map((post) => (
