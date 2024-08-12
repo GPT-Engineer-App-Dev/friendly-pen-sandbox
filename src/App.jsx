@@ -19,6 +19,10 @@ const App = () => {
     setBlogPosts([...blogPosts, newPost]);
   };
 
+  const deletePost = (postId) => {
+    setBlogPosts(blogPosts.filter(post => post.id !== postId));
+  };
+
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
@@ -31,7 +35,7 @@ const App = () => {
                   key={to} 
                   path={to} 
                   element={
-                    React.cloneElement(PageComponent, { blogPosts, addPost })
+                    React.cloneElement(PageComponent, { blogPosts, addPost, deletePost })
                   } 
                 />
               ))}

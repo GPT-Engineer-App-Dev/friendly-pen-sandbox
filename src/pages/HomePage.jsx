@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { Button } from "@/components/ui/button";
-import { PlusCircle } from "lucide-react";
+import { PlusCircle, Trash2 } from "lucide-react";
 
-const HomePage = ({ blogPosts }) => {
+const HomePage = ({ blogPosts, deletePost }) => {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-8">
@@ -31,7 +31,17 @@ const HomePage = ({ blogPosts }) => {
             </CardContent>
             <CardFooter className="flex justify-between items-center">
               <span className="text-sm text-gray-500">{post.date}</span>
-              <Link to={`/post/${post.id}`} className="text-blue-500 hover:underline">Read more</Link>
+              <div className="flex items-center space-x-2">
+                <Link to={`/post/${post.id}`} className="text-blue-500 hover:underline">Read more</Link>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => deletePost(post.id)}
+                  className="text-red-500 hover:bg-red-100 dark:hover:bg-red-900"
+                >
+                  <Trash2 className="h-4 w-4" />
+                </Button>
+              </div>
             </CardFooter>
           </Card>
         ))}
